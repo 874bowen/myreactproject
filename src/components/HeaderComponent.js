@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
-    Button, Modal, ModalHeader, ModalBody,
+    Button, Modal, ModalHeader, Row, ModalBody,
     Form, FormGroup, FormFeedback, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
@@ -114,7 +114,7 @@ class Header extends Component {
                                 <Label htmlFor="username">Username</Label>
                                 <Input type="text" id="username" name="username"
                                     innerRef={(input) => this.username = input}
-                                    alid={errors.username === ''}
+                                    valid={errors.username === ''}
                                     invalid={errors.username !== ''}
                                     onBlur={this.handleBlur('username')}
                                     onChange={this.handleInputChange} />
