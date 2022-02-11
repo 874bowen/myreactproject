@@ -1,27 +1,38 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform , Fade, Stagger} from 'react-animation-components';
 
 function About(props) {
-    const RenderLeader = (props) => {
-      const leader = props.leader
-      return(
-        <Media className="col-12 mb-4">
-          <Media left className="col-2">
-          <img src={leader.image}/>
-          </Media>
-          <Media body>
-          <Media heading>{leader.name}</Media>
-          <p>{leader.designation}</p>
-          <p>{leader.description}</p>
-          </Media>
-        </Media>
-      );
+
+    const RenderLeader = ({leader, isLoading, errMess}) => {
+      // const leader = props.leader
+
+          return(
+            <Media className="col-12 mb-4">
+              <Media left className="col-2">
+              <img src={baseUrl + leader.image}/>
+              </Media>
+              <Media body>
+              <Media heading>{leader.name}</Media>
+              <p>{leader.designation}</p>
+              <p>{leader.description}</p>
+              </Media>
+            </Media>
+
+          );
     }
 
-    const leaders = props.leaders.map((leader) => {
+    const leaders = props.leaders.leaders.map((leader) => {
+
         return (
-            <RenderLeader leader={leader}/>
+          <Fade in>
+            <RenderLeader leader={leader}
+            isLoading = {props.leadersLoading}
+            errMess = {props.leadersErrMess}/>
+            </Fade>
         );
     });
 
@@ -81,12 +92,15 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
+                    <Stagger in duration ={300}>
                         {leaders}
+                        </Stagger>
                     </Media>
                 </div>
             </div>
         </div>
     );
-}
+  }
+
 
 export default About;
